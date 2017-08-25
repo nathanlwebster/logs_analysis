@@ -5,10 +5,10 @@ import calendar
 def question1():
     conn = psycopg2.connect(dbname="news")
     cursor = conn.cursor()
-    cursor.execute("SELECT articles.title, count(articles.title) as num" +
+    cursor.execute("SELECT articles.title, count(articles.title) as num " +
                    "from log, articles where substr(log.path, 10, 30) =" +
                    "articles.slug group by articles.title order by num desc" +
-                   "limit 3;")
+                   " limit 3;")
     results = cursor.fetchall()
     print("\n\n")
     print("\nWhat are the most popular three articles of all time?")
@@ -21,7 +21,7 @@ def question1():
 def question2():
     conn = psycopg2.connect(dbname="news")
     cursor = conn.cursor()
-    cursor.execute("SELECT authors.name, count(authors.name) as num from" +
+    cursor.execute("SELECT authors.name, count(authors.name) as num from " +
                    "log, authors, articles  where substr(log.path, 10, 30)" +
                    " = articles.slug and authors.id = articles.author group" +
                    " by authors.name order by num desc;")
